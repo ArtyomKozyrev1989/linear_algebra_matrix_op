@@ -45,9 +45,52 @@ class SquareMatrix:
         return len(self.matrix)
         
         
-    #def __add__(self, another):
-        #return self.matrix[0][0] + another.matrix[0][0]
+    def __add__(self, another):
+        if len(self) != len(another):
+            raise ValueError("The matrixes should have the same dimensions")
+        else:
+            new_matrix = []
+            for line_index in range(len(self)):
+                new_line = []
+                for item_index in range(len(self)):
+                    new_line.append(self.matrix[line_index][item_index] + another.matrix[line_index][item_index])
+                new_matrix.append(new_line)                
+            return SquareMatrix(new_matrix)
     
     
-    #def __sub__(self, another):
-        #return self.matrix[0][0] - another.matrix[0][0]
+    def __sub__(self, another):
+        if len(self) != len(another):
+            raise ValueError("The matrixes should have the same dimensions")
+        else:
+            new_matrix = []
+            for line_index in range(len(self)):
+                new_line = []
+                for item_index in range(len(self)):
+                    new_line.append(self.matrix[line_index][item_index] - another.matrix[line_index][item_index])
+                new_matrix.append(new_line)                
+            return SquareMatrix(new_matrix)
+        
+    
+    def __eq__(self, another):
+        if len(self) != len(another):
+            return False
+        else:
+            for line_index in range(len(self)):
+                for item_index in range(len(self)):
+                    if self.matrix[line_index][item_index] != another.matrix[line_index][item_index]:
+                        return False
+            return True
+    
+    
+    def __mul__(self, another):
+        if type(another) == int or type(another) == float:
+            new_matrix = []
+            for line_index in range(len(self)):
+                new_line = []
+                for item_index in range(len(self)):
+                    new_line.append(another * self.matrix[line_index][item_index])
+                new_matrix.append(new_line)
+            return SquareMatrix(new_matrix)
+        else:
+            raise ValueError("XXX")
+            
